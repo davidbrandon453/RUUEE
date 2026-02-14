@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Rue ❤️ My Heart Whispers Your Name</title>
+
+<style>
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: "Georgia", serif;
+  background: radial-gradient(circle at top, #ff9a9e, #fad0c4);
+  overflow: hidden;
+}
+
+/* ===================== */
+/* ADDED: LIVE BACKGROUND VIDEO STYLE */
+/* ===================== */
+#bgVideo {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+  z-index: -10;
+}
+/* ===================== */
+
+.box {
+  max-width: 520px;
+  margin: 60px auto;
+  background: white;
+  padding: 35px;
+  border-radius: 25px;
+  box-shadow: 0 15px 50px rgba(0,0,0,0.25);
+  animation: fadeIn 1.2s ease forwards;
+}
+
+h2 { 
+  text-align: center; 
+  color: #ff1f62;
+  font-size: 28px;
+}
+
+label {
+  display: block;
+  margin-top: 18px;
+  font-weight: bold;
+  font-size: 17px;
+  color: #ff2a6c;
+}
+
+input, textarea {
+  width: 100%;
+  margin-top: 8px;
+  padding: 14px;
+  border-radius: 12px;
+  border: 1px solid #f48fb1;
+  font-size: 16px;
+}
+
+button {
+  width: 100%;
+  margin-top: 35px;
+  padding: 18px;
+  font-size: 20px;
+  font-weight: bold;
+  background: linear-gradient(135deg, #ff4d6d, #ff758c);
+  color: white;
+  border: none;
+  border-radius: 40px;
+  cursor: pointer;
+  box-shadow: 0 0 25px rgba(255,77,109,0.7);
+  animation: glow 2.5s infinite;
+}
+
+button:hover { transform: scale(1.05); }
+
+@keyframes glow {
+  0% { box-shadow: 0 0 10px rgba(255,77,109,0.5); }
+  50% { box-shadow: 0 0 30px rgba(255,77,109,0.9); }
+  100% { box-shadow: 0 0 10px rgba(255,77,109,0.5); }
+}
+
+.heart {
+  position: fixed;
+  bottom: -30px;
+  font-size: 22px;
+  animation: floatUp linear infinite;
+  opacity: 0.9;
+  pointer-events: none;
+}
+
+@keyframes floatUp {
+  from { transform: translateY(0) scale(1); opacity: 1; }
+  to { transform: translateY(-120vh) scale(1.4); opacity: 0; }
+}
+
+#finalScreen {
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle at center, #ff758c, #ff7eb3);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: white;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 2s ease;
+  padding: 20px;
+}
+
+#finalScreen.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+#finalScreen h1 {
+  font-size: 42px;
+  margin-bottom: 25px;
+  animation: pulse 3s infinite;
+  font-family: "Georgia", serif;
+}
+
+#finalScreen p {
+  font-size: 20px;
+  max-width: 520px;
+  line-height: 1.6;
+  color: #fff0f5;
+  text-shadow: 1px 1px 4px #ff4d6d;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.08); }
+  100% { transform: scale(1); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+</style>
+</head>
+
+<body>
+
+<!-- ===================== -->
+<!-- ADDED: LIVE BACKGROUND VIDEO -->
+<!-- ===================== -->
+<video autoplay muted loop id="bgVideo">
+  <source src="love-bg.mp4" type="video/mp4">
+</video>
+<!-- ===================== -->
+
+<!-- QUIZ -->
+<div class="box" id="quizBox">
+  <h2>Oh Dearest Rue… My Heart Beats for You 🌹</h2>
+
+  <form onsubmit="checkAnswers(); return false;">
+    <label>1. My favourite soccer team?</label>
+    <input type="text" id="q1">
+
+    <label>2. My favourite soccer player?</label>
+    <input type="text" id="q2">
+
+    <label>3. My favourite part of your body?</label>
+    <input type="text" id="q3">
+
+    <label>4. How I saved you muphone mangu?</label>
+    <textarea id="q4"></textarea>
+
+    <button type="submit">Reveal My Heart’s Whisper 💖</button>
+  </form>
+</div>
+
+<!-- FINAL SCREEN -->
+<div id="finalScreen">
+  <h1>Rue ❤️</h1>
+  <p id="finalMessage"></p>
+</div>
+
+<script>
+function clean(t) {
+  return t.toLowerCase().trim();
+}
+
+// Floating hearts
+setInterval(() => {
+  const h = document.createElement("div");
+  h.className = "heart";
+  h.textContent = Math.random() > 0.5 ? "❤️" : "💖";
+  h.style.left = Math.random() * 100 + "vw";
+  h.style.animationDuration = 6 + Math.random() * 6 + "s";
+  document.body.appendChild(h);
+  setTimeout(() => h.remove(), 12000);
+}, 600);
+
+// Heart burst
+function burstHearts() {
+  for (let i = 0; i < 28; i++) {
+    const h = document.createElement("div");
+    h.textContent = "❤️";
+    h.style.position = "fixed";
+    h.style.left = "50%";
+    h.style.top = "50%";
+    h.style.fontSize = "22px";
+    h.style.transform =
+      `translate(${Math.random()*420-210}px, ${Math.random()*420-210}px)`;
+    h.style.transition = "all 1.6s ease";
+    document.body.appendChild(h);
+    setTimeout(() => h.remove(), 1600);
+  }
+}
+
+// Typing effect
+function typeMessage(element, message, speed = 30) {
+  element.innerHTML = "";
+  let i = 0;
+  const interval = setInterval(() => {
+    element.innerHTML += message[i];
+    i++;
+    if (i >= message.length) clearInterval(interval);
+  }, speed);
+}
+
+// Submit logic
+function checkAnswers() {
+  burstHearts();
+
+  let score = 0;
+  if(clean(q1.value).includes("barcelona")) score++;
+  if(clean(q2.value).includes("raphinha")) score++;
+  if(clean(q3.value).includes("legs") || clean(q3.value).includes("butt")) score++;
+  if(clean(q4.value).includes("she scara")) score++;
+
+  setTimeout(() => {
+    quizBox.style.display = "none";
+    finalScreen.classList.add("show");
+
+    const finalMessageText = score >= 3
+      ? `My beloved Rue… 🌹  
+Every beat of my heart whispers your name.  
+Your smile, your voice, your very soul enthralls me endlessly.  
+I crafted this not as a game, but as a testament that you are my forever, my safe harbor, my one true joy ❤️NDOKUDA!💖`
+      : `Oh sweet Rue… even if a few answers escaped you, know this:  
+You are my laughter, my warmth, my guiding light.  
+Every moment with you renders the world more beautiful, and my love for you knows no bounds ❤️💖`;
+
+    typeMessage(finalMessage, finalMessageText);
+  }, 1600);
+}
+</script>
+
+</body>
+</html>
